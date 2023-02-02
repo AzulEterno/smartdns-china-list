@@ -1,14 +1,14 @@
 name: format_smartdns
-run-name: Updating format to smart dns
+run-name: Formating to smart dns syntax
 on: [push]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@master
       - name: Build
-        uses: AzulEterno/smartdns-china-list@main
+        uses: AzulEterno/smartdns-china-list@master
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: main
