@@ -5,8 +5,14 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: ./smartdns/run_shell.sh
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Build
+        uses: AzulEterno/smartdns-china-list@main
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: main
+          FOLDER: .
+          BUILD_SCRIPT: ./smartdns/run_build.sh
+        
+        
