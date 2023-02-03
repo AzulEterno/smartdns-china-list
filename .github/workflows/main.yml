@@ -7,3 +7,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: ls -al
+      - run: ./smartdns/run_build.sh
