@@ -5,9 +5,10 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
+      - uses: AzulEterno/smartdns-china-list@master
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - uses: AzulEterno/smartdns-china-list@master
+
       - run: ls -al
