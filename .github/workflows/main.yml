@@ -9,11 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Initalizing Environment
-        uses: actions/checkout@v3
+        uses: actions/checkout@main
       - name: Build Factors
+        id: build
         run: |
           chmod a+x ./smartdns/run_build.sh
           ./smartdns/run_build.sh
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        if: steps.build.outputs.status == 'success'
+        with:
+          name: Result Files
+          path: ./smartdns/outputs/
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
