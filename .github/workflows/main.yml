@@ -26,4 +26,5 @@ jobs:
             ./smartdns/outputs/cn_domains.conf
             ./smartdns/outputs/apple_china.conf
             ./smartdns/outputs/google_china.conf
+          
   
