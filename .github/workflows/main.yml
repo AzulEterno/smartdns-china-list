@@ -11,15 +11,13 @@ jobs:
         run: |
           chmod a+x ./smartdns/run_build.sh
           ./smartdns/run_build.sh
-      - name: Generate Changelog
-        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
-          body: TODO New Release.
+          body: Auto Build script did this.
           draft: false
           prerelease: false
           files: |
