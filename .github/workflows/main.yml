@@ -14,15 +14,19 @@ jobs:
         id: build
         run: |
           chmod a+x ./smartdns/run_build.sh
-          ./smartdns/run_build.sh && echo "::set-output name=status::success"
+          ./smartdns/run_build.sh && echo "status=success" >> $GITHUB_OUTPUT
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         if: steps.build.outputs.status == 'success'
         with:
-          name: Result Files
-          path: ./smartdns/outputs/
+          # name: Result Files
+          path: |
+            ./smartdns/outputs/cn_domains.conf
+            ./smartdns/outputs/apple_china.conf
+            ./smartdns/outputs/google_china.conf
       - name: Release
         uses: softprops/action-gh-release@v1
+        if: steps.build.outputs.status == 'success'
         with:
           tag_name: Auto-Build
           name: Release ${{ github.ref }}
