@@ -17,8 +17,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          # tag_name: ${{ github.ref }}
-          # name: Release ${{ github.ref }}
+          tag_name: Auto-Build
+          name: Release ${{ github.ref }}
           body: Auto Build script did this.
           # draft: false
           # prerelease: false
