@@ -2,8 +2,8 @@ name: Auto-Build-Release
 run-name: ${{ github.actor }} is building new release.
 on: 
   push:
-    tags:
-      - "v*.*.*"
+    #tags:
+    #  - "v*.*.*"
 jobs:
   do-builds:
     runs-on: ubuntu-latest
