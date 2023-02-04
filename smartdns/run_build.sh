@@ -8,6 +8,8 @@
 
 outputFolderPath="./smartdns/outputs";
 
+signFilePath="./smartdns/configs/signature.txt"
+
 # echo $outputFolderPath;
 
 function create_folder_if_non_exist(){
@@ -44,7 +46,15 @@ function convert_file(){
 
     #echo $inputFilePath $outputFilePath;
     # columns needs to be transed.
-    sed -ne "s/\(server=\/\)\(.*\)\(\/114\.114\.114\.114\)/${prefix_str}\2${appendix_str}/p" "$inputFilePath"  > "$outputFilePath";
+    echo -ne > "$outputFilePath";
+
+    if [ -f "$signFilePath" ];then
+        cat "$signFilePath" >> "$outputFilePath";
+        echo "# Build Time: $(date)">> "$outputFilePath";
+        
+    fi
+
+    sed -ne "s/\(server=\/\)\(.*\)\(\/114\.114\.114\.114\)/${prefix_str}\2${appendix_str}/p" "$inputFilePath"  >> "$outputFilePath";
     return $?;
 }
 
@@ -56,6 +66,10 @@ if [[ $? == 0 ]];then
     convert_file "accelerated-domains.china.conf" "$outputFolderPath/cn_domains.conf";
     convert_file "apple.china.conf" "$outputFolderPath/apple_china.conf";
     convert_file "google.china.conf" "$outputFolderPath/google_china.conf";
+
+    convert_file "accelerated-domains.china.conf" "$outputFolderPath/cn_domains.dset" "" "";
+    convert_file "apple.china.conf" "$outputFolderPath/apple_china.dset" "" "";
+    convert_file "google.china.conf" "$outputFolderPath/google_china.dset" "" "";
 
     exit $?;
 else
