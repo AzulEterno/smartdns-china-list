@@ -1,6 +1,9 @@
 name: Auto-Build-Release
 run-name: ${{ github.actor }} is building new release.
-on: [push]
+on: 
+  push:
+    tags:
+      - "v*.*.*"
 jobs:
   do-builds:
     runs-on: ubuntu-latest
@@ -13,7 +16,6 @@ jobs:
           ./smartdns/run_build.sh
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
