@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@main
         if: steps.build.outputs.status == 'success'
         with:
-          # name: Result Files
+          name: Result Files
           path: |
             ./smartdns/outputs/cn_domains.conf
             ./smartdns/outputs/apple_china.conf
