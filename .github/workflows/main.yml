@@ -2,14 +2,19 @@ name: Auto-Build-Release
 run-name: ${{ github.actor }} is building new release.
 on: [push]
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
   do-builds:
     runs-on: ubuntu-latest
     steps:
-      - run: chmod a+x ./smartdns/run_build.sh
-      - run: ./smartdns/run_build.sh
+      - name: Initalizing Environment
+        uses: actions/checkout@v3
+      - name: Build Factors
+        run: |
+          chmod a+x ./smartdns/run_build.sh
+          ./smartdns/run_build.sh
+      - name: Generate Changelog
+        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_REPOSITORY: AzulEterno/smartdns-china-list
   
