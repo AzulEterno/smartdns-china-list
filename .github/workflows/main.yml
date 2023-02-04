@@ -31,7 +31,7 @@ jobs:
           tag_name: Auto-Build
           name: Release ${{ github.ref }}
           body: Auto Build script did this.
-          # draft: false
+          draft: false
           # prerelease: false
           files: |
             ./smartdns/outputs/cn_domains.conf
