@@ -32,7 +32,7 @@ jobs:
           name: Release ${{ github.ref }}
           body: Auto Build script did this.
           draft: false
-          # prerelease: false
+          prerelease: false
           files: |
             ./smartdns/outputs/cn_domains.conf
             ./smartdns/outputs/apple_china.conf
