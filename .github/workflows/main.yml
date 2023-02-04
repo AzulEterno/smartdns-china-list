@@ -14,7 +14,7 @@ jobs:
         id: build
         run: |
           chmod a+x ./smartdns/run_build.sh
-          ./smartdns/run_build.sh
+          ./smartdns/run_build.sh && echo "::set-output name=status::success"
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         if: steps.build.outputs.status == 'success'
