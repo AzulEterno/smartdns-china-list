@@ -126,7 +126,7 @@ class ChinaListVerify
         begin
             tld_ns = get_ns_for_tld(PublicSuffix.parse(domain, ignore_private: true).tld)
         rescue PublicSuffix::DomainNotAllowed, PublicSuffix::DomainInvalid
-            yield nil, "Domain #{domain} isn't a valid domain"
+            yield nil, "Invalid domain #{domain}"
             return nil
         end
         response, glue = self.resolve(
@@ -294,7 +294,7 @@ if __FILE__ == $0
     v = ChinaListVerify.new options.dns
 
     if options.domain
-        v.check_domain_verbose(options.domain, show_green: options.verbose)
+        exit v.check_domain_verbose(options.domain, show_green: options.verbose) == true
     else
         v.check_domain_list(options.file, sample: options.sample, show_green: options.verbose)
     end
